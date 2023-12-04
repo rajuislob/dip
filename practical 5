@@ -1,0 +1,23 @@
+PRACTICAL 5 
+clc; 
+image = imread("'PARROT.jpg'") 
+ 
+grayimg = rgb2gray(image) 
+histogram1 = imhist(grayimg) 
+ 
+grayimg2 = imhistequal(grayimg) 
+histogram2 = imhist(grayimg2) 
+ 
+subplot(2,2,1) 
+imshow(grayimg) 
+ 
+subplot(2,2,2) 
+plot2d3(0:255,histogram1) 
+ 
+subplot(2,2,3) 
+imshow(grayimg2) 
+ 
+subplot(2,2,4) 
+plot2d3(0:255,histogram2) 
+ 
+ 
