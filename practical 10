@@ -1,0 +1,21 @@
+PRACTICAL 10 
+clc; 
+image = imread("C:\\Users\\lenovo\\Downloads\\parakeet.jpg") 
+image2 = rgb2gray(image) 
+image2=mat2gray(image2) 
+image3 = edge(image2,'sobel') 
+image4 = edge(image2,'prewitt') 
+image5 = edge(image2,'log') 
+ 
+subplot(2,2,1) 
+imshow(image3) 
+ 
+subplot(2,2,2) 
+imshow(image3) 
+ 
+subplot(2,2,3) 
+imshow(image4) 
+ 
+subplot(2,2,4) 
+imshow(image5) 
+ 
