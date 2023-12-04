@@ -1,0 +1,36 @@
+PRACTICAL 7 
+ 
+clc; 
+image = imread(PARROT.jpg") 
+image2 = rgb2gray(image) 
+//image3 = imnoise(image2,'salt & pepper',0.3) 
+// 
+//subplot(2,2,1) 
+//imshow(image) 
+// 
+//subplot(2,2,2) 
+//imshow(image3) 
+// 
+//mask = ones(3,3)/9 
+//disp(mask) 
+// 
+//image4 = imfilter(image3,mask) 
+// 
+//subplot(2,2,3) 
+//imshow(image4) 
+image3 = imnoise(image2,'gaussian') 
+ 
+subplot(2,2,1) 
+imshow(image) 
+ 
+subplot(2,2,2) 
+imshow(image3) 
+ 
+mask = ones(3,3)/9 
+disp(mask) 
+ 
+image4 = imfilter(image3,mask) 
+ 
+subplot(2,2,3) 
+imshow(image4) 
+ 
