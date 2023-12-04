@@ -1,0 +1,8 @@
+Practical 4 
+a) 
+        img1=imread('PARROT.jpg');                   img2=imread('PARROT.jpg');                   gray1=rgb2gray(img1);                   gray2=rgb2gray(img2);                   [r,c]=size(gray1);                   And=zeros(r,c,'uint8');                   //Or=zeros(r,c,'uint8');                   for i=1:r                       for j=1:c                           And(i,j)=bitand(img1(i,j),img2(i,j));                           //Or(i,j)=bitor(img1(i,j),img2(i,j));                       end                   end                   imshow(And);                   //imshow(Or);  
+  
+b) 
+        img1=imread('PARROT.jpg');                   img2=imread('PARROT2.jpg');                   gray1=rgb2gray(img1);                   gray2=rgb2gray(img2);                   [r,c]=size(gray1);                   //And=zeros(r,c,'uint8');                   Or=zeros(r,c,'uint8');                   for i=1:r                       for j=1:c                           //And(i,j)=bitand(img1(i,j),img2(i,j));                           Or(i,j)=bitor(img1(i,j),img2(i,j));                       end                   end                   //imshow(And);                   imshow(Or);  
+ 
+
