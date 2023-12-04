@@ -1,0 +1,29 @@
+/*1. Write program to read and display digital image using MATLAB or SCILAB
+a. Become familiar with SCILAB/MATLAB Basic commands
+b. Read and display image in SCILAB/MATLAB
+c. Resize given image
+d. Convert given color image into gray-scale image
+e. Convert given color/gray-scale image into black & white image
+f. Draw image profile
+g. Separate color image in three R G & B planes
+h. Create color image using R, G and B three separate planes
+76
+i. Flow control and LOOP in SCILAB
+j. Write given 2-D data in image file*/
+
+
+
+b)     img=imread('PARROT.jpg');        imshow(img)  
+  
+c)      img1=imresize(img,0.5);  
+  
+d)      gray=rgb2gray(img)        imshow(gray);  
+  
+e)      bw=im2bw(gray,0.6)        imshow(bw)  
+  
+f)            improfile(img) 
+g)      img=imread('PARROT.jpg');                         [r,c]=size(img);                         R=zeros(r,c,3,'uint8');                         G=zeros(r,c,3,'uint8');                         B=zeros(r,c,3,'uint8');                         R(:,:,1)=img(:,:,1);                         G(:,:,2)=img(:,:,2);                         B(:,:,3)=img(:,:,3);                         subplot(2,2,1);                                             imshow(R);                         subplot(2,2,2);                         imshow(G);                         subplot(2,2,3);                         imshow(B);  
+  
+h) and f)              RGB=zeros(r,c,3,'uint8');        for i=1:r                              for j=1:c                                  RGB(i,j,1)=R(i,j,1)                                  RGB(i,j,2)=G(i,j,2)                                  RGB(i,j,3)=B(i,j,3)                             end                         end                         subplot(2,2,4)                         imshow(RGB)  
+  
+j)      imwrite(R,"RedPlane.jpg")   
