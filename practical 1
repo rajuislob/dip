@@ -1,18 +1,4 @@
-/*1. Write program to read and display digital image using MATLAB or SCILAB
-a. Become familiar with SCILAB/MATLAB Basic commands
-b. Read and display image in SCILAB/MATLAB
-c. Resize given image
-d. Convert given color image into gray-scale image
-e. Convert given color/gray-scale image into black & white image
-f. Draw image profile
-g. Separate color image in three R G & B planes
-h. Create color image using R, G and B three separate planes
-76
-i. Flow control and LOOP in SCILAB
-j. Write given 2-D data in image file*/
-
-
-
+Practical 1 
 b)     img=imread('PARROT.jpg');        imshow(img)  
   
 c)      img1=imresize(img,0.5);  
