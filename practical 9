@@ -41,4 +41,59 @@ i3=real(ifft(i2));
 subplot(3,3,7); 
 imshow(i3); 
 title("Butterworth Highpass"); 
+=====================================================================
+
+
+% Read the input image and display it
+originalImage = imread('input_image.jpg'); // Replace 'input_image.jpg' with your image file
+imshow(originalImage);
+title('Original Image');
+
+% Convert the image to grayscale if it's a color image
+if size(originalImage, 3) == 3
+    originalImage = rgb2gray(originalImage);
+end
+
+% Apply FFT on the image
+fftImage = fft2(double(originalImage));
+
+% Frequency domain filtering: Low-pass filter
+% Define the cutoff frequency for the low-pass filter
+cutoff_frequency = 30; // Adjust this value as needed
+
+% Create a mesh grid for filtering
+[u, v] = ndgrid(1:size(originalImage, 1), 1:size(originalImage, 2));
+center_x = size(originalImage, 2) / 2;
+center_y = size(originalImage, 1) / 2;
+low_pass_mask = sqrt((u - center_x).^2 + (v - center_y).^2) <= cutoff_frequency;
+
+% Apply the low-pass filter in frequency domain
+filtered_fft_low = fftImage .* low_pass_mask;
+
+% Frequency domain filtering: High-pass filter (complement of the low-pass filter)
+high_pass_mask = ~low_pass_mask;
+filtered_fft_high = fftImage .* high_pass_mask;
+
+% Reconstruct images using IFFT for both low-pass and high-pass filtering
+reconstructed_low = ifft2(filtered_fft_low);
+reconstructed_high = ifft2(filtered_fft_high);
+
+% Display the filtered images
+figure;
+subplot(2, 2, 1);
+plot_spectrum(fftImage);
+title('FFT of Original Image');
+
+subplot(2, 2, 2);
+plot_spectrum(filtered_fft_low);
+title('Filtered FFT (Low-pass)');
+
+subplot(2, 2, 3);
+imshow(uint8(abs(reconstructed_low)));
+title('Reconstructed Image (Low-pass)');
+
+subplot(2, 2, 4);
+imshow(uint8(abs(reconstructed_high)));
+title('Reconstructed Image (High-pass)');
+
  
