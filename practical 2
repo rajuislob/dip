@@ -6,3 +6,46 @@ b)
   
 c) 
         gray=rgb2gray(img);                   thres=zeros(r,c,'uint8');                   for i=1:r                       for j=1:c                           if gray(i,j)>=100 then                               thres(i,j)=255;                           else                               thres(i,j)=0                           end                       end                   end                   subplot(1,3,3)                   imshow(thres) d)                   img=imread('image.jpg');                   gray=rgb2gray(img);                   contrast=imhistequal(gray);                   subplot(2,2,1)                   imshow(contrast);                   subplot(2,2,2)                   imshow(gray);  
+
+-------------------------------------------
+input_image= imread("p1.png"); 
+
+imshow(input_image); 
+
+title('ORIGINAL IMAGE'); 
+
+%negitive  
+
+neg_img=255-input_image; 
+
+figure; 
+
+imshow(neg_img); 
+
+title('NEGITIVE IMAGE'); 
+
+%b.Flip Image (Horizontal Flip)  
+
+flip_image = flip(input_image, 2);  
+
+figure;  
+
+imshow(flip_image);  
+
+title('Horizontal Flip Image');  
+
+%c.Thresholding  
+
+grayImage = rgb2gray(input_image); 
+
+thresholdValue = 128;  
+
+binaryImage = grayImage > thresholdValue; 
+
+figure; 
+
+imshow(binaryImage); 
+
+title('Thresholded Binary Image'); 
+
+ 
