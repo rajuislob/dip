@@ -136,4 +136,14 @@ imwrite(gray_image, 'gray_image.jpg');
 
 disp('Grayscale image written to "gray_image.jpg"');  
 
+%j
+% Example in MATLAB
+% Suppose you have a 2-D matrix 'data' that you want to write to an image file
+
+% 'data' is your 2-D matrix, replace this with your actual data
+data = rand(100, 100); % Example random data (100x100)
+
+% Save the data as an image file (e.g., PNG format)
+imwrite(data, 'output_image.png'); % Save 'data' as 'output_image.png' file
+
  
