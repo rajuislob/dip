@@ -21,3 +21,39 @@ subplot(2,2,4)
 plot2d3(0:255,histogram2) 
  
  
+----------------------------------------------------
+% Assuming 'image' is your grayscale image stored as a matrix
+
+% Initialize an empty histogram with 256 bins (for 8-bit grayscale images)
+histogram = zeros(1, 256);
+
+% Calculate the frequency of each pixel intensity
+[numRows, numCols] = size(image);
+for i = 1:numRows
+    for j = 1:numCols
+        intensity = image(i, j) + 1; % Add 1 to handle zero-based indexing
+        histogram(intensity) = histogram(intensity) + 1;
+    end
+end
+%equalisation 
+% Assuming 'image' is your grayscale image stored as a matrix and 'histogram' is the calculated histogram
+
+numPixels = numRows * numCols;
+cumulativeDistribution = zeros(1, 256);
+cumulative = 0;
+
+% Calculate cumulative distribution function
+for i = 1:256
+    cumulative = cumulative + histogram(i);
+    cumulativeDistribution(i) = cumulative;
+end
+
+% Perform histogram equalization
+equalizedImage = zeros(numRows, numCols);
+for i = 1:numRows
+    for j = 1:numCols
+        intensity = image(i, j) + 1; % Add 1 to handle zero-based indexing
+        equalizedIntensity = floor((cumulativeDistribution(intensity) / numPixels) * 255);
+        equalizedImage(i, j) = equalizedIntensity;
+    end
+end
