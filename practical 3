@@ -1,3 +1,48 @@
 Practical 3 a)                   img1=imread('image.jpg')                   img2=imread('image1.jpg')                   img=imadd(img1,img2)                   imshow(img)   
 b) 
         imgSub=imsubtract(img1,img2);                   imshow(imgSub) c)                   img=imread('image1.jpg');                   [r,c]=size(img);                   ans=0;                   gray=rgb2gray(img);                   for i=1:r                       for j=1:c                           ans=(uint32(ans) + gray(i,j));                       end    end                   Mean=double(ans)/(r*c);                   disp(Mean); 
+
+---------------------------------
+image1 = imread('gi.png');  
+
+image2 = imread('gi2.jpg');  
+
+subplot(2, 2, 1);  
+
+imshow(image1);  
+
+title('Image 1');  
+
+subplot(2, 2, 2);  
+
+imshow(image2);  
+
+title('Image 2');  
+
+% Addition  
+
+addition_result = imadd(image1, image2);  
+
+subplot(2, 2, 3);  
+
+imshow(addition_result);  
+
+title('Image 1 + Image 2');  
+
+subtraction_result = imsubtract(image1, image2);  
+
+subplot(2, 2, 4);  
+
+imshow(subtraction_result);  
+
+title('Image 1 - Image 2');  
+
+mean_value_image1 = mean2(image1);  
+
+mean_value_image2 = mean2(image2);  
+
+disp(['Mean value of Image 1: ', num2str(mean_value_image1)]);  
+
+disp(['Mean value of Image 2: ', num2str(mean_value_image2)]); 
+
+ 
