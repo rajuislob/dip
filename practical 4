@@ -6,3 +6,71 @@ b)
         img1=imread('PARROT.jpg');                   img2=imread('PARROT2.jpg');                   gray1=rgb2gray(img1);                   gray2=rgb2gray(img2);                   [r,c]=size(gray1);                   //And=zeros(r,c,'uint8');                   Or=zeros(r,c,'uint8');                   for i=1:r                       for j=1:c                           //And(i,j)=bitand(img1(i,j),img2(i,j));                           Or(i,j)=bitor(img1(i,j),img2(i,j));                       end                   end                   //imshow(And);                   imshow(Or);  
  
 
+----------------
+image1 = imread('gi.png');  
+
+image2 = imread('gi2.jpg');  
+
+subplot(2, 2, 1);  
+
+imshow(image1);  
+
+title('Image 1');  
+
+subplot(2, 2, 2);  
+
+imshow(image2);  
+
+title('Image 2');  
+
+and_result = bitand(image1, image2);  
+
+subplot(2, 2, 3);  
+
+imshow(and_result);  
+
+title('AND Operation');  
+
+or_result = bitor(image1, image2);  
+
+subplot(2, 2, 4);  
+
+imshow(or_result);  
+
+title('OR Operation');  
+
+binary_image1 = imbinarize(rgb2gray(image1)); 
+
+binary_image2 = imbinarize(rgb2gray(image2)); 
+
+intersection_result = binary_image1 & binary_image2;  
+
+figure;  
+
+subplot(1, 2, 1);  
+
+imshow(binary_image1);  
+
+title('Binary Image 1');  
+
+subplot(1, 2, 2);  
+
+imshow(binary_image2);  
+
+title('Binary Image 2');  
+
+figure;  
+
+imshow(intersection_result);  
+
+title('Intersection (Logical AND)');  
+
+negative_image1 = 255 - image1;  
+
+figure;  
+
+imshow(negative_image1);  
+
+title('Negative Image (NOT Operation)');  
+
+ 
