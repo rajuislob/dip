@@ -13,3 +13,81 @@ g)      img=imread('PARROT.jpg');                         [r,c]=size(img);      
 h) and f)              RGB=zeros(r,c,3,'uint8');        for i=1:r                              for j=1:c                                  RGB(i,j,1)=R(i,j,1)                                  RGB(i,j,2)=G(i,j,2)                                  RGB(i,j,3)=B(i,j,3)                             end                         end                         subplot(2,2,4)                         imshow(RGB)  
   
 j)      imwrite(R,"RedPlane.jpg")   
+
+
+-----------------------------------------------------------------
+%a. 
+
+image = imread('p1.png');  
+
+imshow(image);  
+
+title('Original Image');  
+
+%b. 
+
+resized_image = imresize(image, [200, 300]);  
+
+figure;  
+
+imshow(resized_image);  
+
+title('Resized Image');  
+
+%c. 
+
+gray_image = rgb2gray(image);  
+
+figure;  
+
+imshow(gray_image);  
+
+title('Grayscale Image');  
+
+%d. 
+
+threshold = graythresh(gray_image);  
+
+bw_image = imbinarize(gray_image, threshold);  
+
+figure;  
+
+imshow(bw_image);  
+
+title('Black & White Image');  
+
+%e. 
+
+profile_x = mean(double('B2.tif'), 2);  
+
+profile_y = mean(double('B2.tif'), 1);  
+
+figure;  
+
+subplot(2, 1, 1);  
+
+plot(profile_x);  
+
+title('Horizontal Image Profile');  
+
+subplot(2, 1, 2);  
+
+plot(profile_y);  
+
+title('Vertical Image Profile');  
+
+%h. 
+
+for i = 1:10  
+
+disp(['Loop Iteration ', num2str(i)]);  
+
+end  
+
+%i. 
+
+imwrite(gray_image, 'gray_image.jpg');  
+
+disp('Grayscale image written to "gray_image.jpg"');  
+
+ 
