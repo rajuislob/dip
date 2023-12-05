@@ -22,38 +22,90 @@ plot2d3(0:255,histogram2)
  
  
 ----------------------------------------------------
-% Assuming 'image' is your grayscale image stored as a matrix
 
-% Initialize an empty histogram with 256 bins (for 8-bit grayscale images)
-histogram = zeros(1, 256);
+calculation
+// Read the input image
+image = imread('input_image.jpg'); // Replace 'input_image.jpg' with your image file
 
-% Calculate the frequency of each pixel intensity
-[numRows, numCols] = size(image);
+// Convert the image to grayscale if it's a color image
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+// Calculate histogram using standard function 'imhist'
+histogram_values = imhist(image);
+
+// Display the histogram
+bar(histogram_values);
+title('Histogram of the Image (Using Standard Function)');
+xlabel('Pixel Intensity');
+ylabel('Frequency');
+
+
+equalisation
+// Perform histogram equalization using standard function 'histeq'
+equalized_image = histeq(image);
+
+// Display the original and equalized images
+figure;
+subplot(1, 2, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 2, 2);
+imshow(uint8(equalized_image));
+title('Histogram Equalized Image (Using Standard Function)');
+
+
+without fn calculation-
+// Read the input image
+image = imread('input_image.jpg'); // Replace 'input_image.jpg' with your image file
+
+// Convert the image to grayscale if it's a color image
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+// Calculate histogram without using standard function
+numRows = size(image, 1);
+numCols = size(image, 2);
+histogram_values = zeros(1, 256);
+
 for i = 1:numRows
     for j = 1:numCols
-        intensity = image(i, j) + 1; % Add 1 to handle zero-based indexing
-        histogram(intensity) = histogram(intensity) + 1;
+        pixel_value = image(i, j);
+        histogram_values(pixel_value + 1) = histogram_values(pixel_value + 1) + 1;
     end
 end
-%equalisation 
-% Assuming 'image' is your grayscale image stored as a matrix and 'histogram' is the calculated histogram
 
-numPixels = numRows * numCols;
-cumulativeDistribution = zeros(1, 256);
-cumulative = 0;
+// Display the histogram
+bar(histogram_values);
+title('Histogram of the Image (Without Standard Function)');
+xlabel('Pixel Intensity');
+ylabel('Frequency');
 
-% Calculate cumulative distribution function
-for i = 1:256
-    cumulative = cumulative + histogram(i);
-    cumulativeDistribution(i) = cumulative;
-end
 
-% Perform histogram equalization
-equalizedImage = zeros(numRows, numCols);
+equalisation-
+// Perform histogram equalization without using standard function
+num_pixels = numRows * numCols;
+equalized_image = zeros(numRows, numCols);
+
+cdf = cumsum(histogram_values) / num_pixels;
+cdf_mapped = round(cdf * 255);
+
 for i = 1:numRows
     for j = 1:numCols
-        intensity = image(i, j) + 1; % Add 1 to handle zero-based indexing
-        equalizedIntensity = floor((cumulativeDistribution(intensity) / numPixels) * 255);
-        equalizedImage(i, j) = equalizedIntensity;
-    end
+        equalized_image(i, j) = cdf_mapped(image(i, j) + 1);
+    end
 end
+
+// Display the original and equalized images
+figure;
+subplot(1, 2, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 2, 2);
+imshow(uint8(equalized_image));
+title('Histogram Equalized Image (Without Standard Function)');
+
