@@ -134,4 +134,37 @@ zoomedImage = imtransform(img, zoomMat, 'affine');
 subplot(1, 3, 3); 
 imshow(zoomedImage); 
 title('Zoomed Image'); 
- 
+
+
+-------------***********************************
+%a.
+// Read the input image
+image = imread('input_image.jpg'); // Replace 'input_image.jpg' with your image file
+
+// Define translation parameters
+tx = 50; // Translation in the x-axis (horizontal)
+ty = 30; // Translation in the y-axis (vertical)
+
+// Perform translation manually by creating a new image
+translated_image = zeros(size(image), 'uint8');
+
+for i = 1:size(image, 1)
+    for j = 1:size(image, 2)
+        x = i - tx;
+        y = j - ty;
+        
+        if x >= 1 && x <= size(image, 1) && y >= 1 && y <= size(image, 2)
+            translated_image(i, j, :) = image(x, y, :);
+        end
+    end
+end
+
+// Display the original and translated images
+figure;
+subplot(1, 2, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 2, 2);
+imshow(translated_image);
+title('Translated Image');
