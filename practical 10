@@ -18,4 +18,103 @@ imshow(image4)
  
 subplot(2,2,4) 
 imshow(image5) 
- 
+ ==========================================================================================================================
+c code- 
+#include <stdio.h>
+
+void convolve(int image[5][5], int mask[3][3], int result[5][5]) {
+    // Implementation of convolution
+    // ... (Previous convolve function)
+
+    // Previous code for edge detection using Sobel operators
+    // ...
+
+    // Define Prewitt operators for horizontal and vertical edges
+    int prewitt_horizontal[3][3] = {{-1, -1, -1}, {0, 0, 0}, {1, 1, 1}};
+    int prewitt_vertical[3][3] = {{-1, 0, 1}, {-1, 0, 1}, {-1, 0, 1}};
+
+    // Define LoG (Laplacian of Gaussian) operator
+    int log_operator[3][3] = {{0, 1, 0}, {1, -4, 1}, {0, 1, 0}};
+
+    int result_prewitt_horizontal[5][5], result_prewitt_vertical[5][5], result_log[5][5];
+
+    convolve(image, prewitt_horizontal, result_prewitt_horizontal);
+    convolve(image, prewitt_vertical, result_prewitt_vertical);
+    convolve(image, log_operator, result_log);
+
+    // Display the results (print the values or write to a file)
+    // ...
+}
+
+int main() {
+    // Previous code for the main function
+    // ...
+
+    // Call the convolve function with Sobel, Prewitt, and LoG operators
+    convolve(image, mask_horizontal, result_horizontal);
+    convolve(image, mask_vertical, result_vertical);
+
+    // Call convolve function with Prewitt and LoG operators
+    convolve(image, prewitt_horizontal, result_prewitt_horizontal);
+    convolve(image, prewitt_vertical, result_prewitt_vertical);
+    convolve(image, log_operator, result_log);
+
+    // Display the results (print the values or write to a file)
+    // ...
+
+    return 0;
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+SCILAB-
+% Read and display the input image
+image = imread('input_image.jpg'); % Replace 'input_image.jpg' with your image file
+imshow(image);
+title('Original Image');
+
+% Convert the image to grayscale if it's a color image
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+% Define Sobel operators for horizontal and vertical edges
+sobel_horizontal = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
+sobel_vertical = [-1, 0, 1; -2, 0, 2; -1, 0, 1];
+
+% Perform convolution using Sobel operators
+result_horizontal = conv2(double(image), sobel_horizontal, 'same');
+result_vertical = conv2(double(image), sobel_vertical, 'same');
+
+% Define Prewitt operators for horizontal and vertical edges
+prewitt_horizontal = [-1, -1, -1; 0, 0, 0; 1, 1, 1];
+prewitt_vertical = [-1, 0, 1; -1, 0, 1; -1, 0, 1];
+
+% Define LoG (Laplacian of Gaussian) operator
+log_operator = fspecial('log', [3, 3], 0.5); % Adjust sigma value as needed
+
+% Perform convolution using Prewitt and LoG operators
+result_prewitt_horizontal = conv2(double(image), prewitt_horizontal, 'same');
+result_prewitt_vertical = conv2(double(image), prewitt_vertical, 'same');
+result_log = conv2(double(image), log_operator, 'same');
+
+% Display the edge-detected images for Sobel, Prewitt, and LoG operators
+figure;
+subplot(2, 3, 1);
+imshow(uint8(abs(result_horizontal)));
+title('Sobel Horizontal Edges');
+
+subplot(2, 3, 2);
+imshow(uint8(abs(result_vertical)));
+title('Sobel Vertical Edges');
+
+subplot(2, 3, 3);
+imshow(uint8(abs(result_prewitt_horizontal)));
+title('Prewitt Horizontal Edges');
+
+subplot(2, 3, 4);
+imshow(uint8(abs(result_prewitt_vertical)));
+title('Prewitt Vertical Edges');
+
+subplot(2, 3, 5);
+imshow(uint8(abs(result_log)));
+title('LoG (Laplacian of Gaussian)');
+
