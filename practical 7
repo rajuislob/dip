@@ -33,4 +33,56 @@ image4 = imfilter(image3,mask)
  
 subplot(2,2,3) 
 imshow(image4) 
- 
+
+****************************************************
+% Read the noisy image affected by salt and pepper noise
+noisy_image = imread('noisy_image_salt_pepper.jpg'); % Replace 'noisy_image_salt_pepper.jpg' with your image file
+
+% Perform median filtering to remove salt and pepper noise
+restored_image = medfilt2(noisy_image, [3, 3]); % Apply a 3x3 median filter, adjust the size as needed
+
+% Display the noisy and restored images
+figure;
+subplot(1, 2, 1);
+imshow(noisy_image);
+title('Noisy Image (Salt and Pepper)');
+
+subplot(1, 2, 2);
+imshow(restored_image);
+title('Restored Image (Salt and Pepper Noise Removed)');
+
+
+% Read the noisy image affected by Gaussian noise
+noisy_image = imread('noisy_image_gaussian.jpg'); % Replace 'noisy_image_gaussian.jpg' with your image file
+
+% Perform Gaussian smoothing to minimize Gaussian noise (e.g., using a Gaussian filter)
+% You can use 'imgaussfilt' function to apply Gaussian smoothing
+sigma = 2; % Adjust the standard deviation (sigma) value as needed
+smoothed_image = imgaussfilt(noisy_image, sigma);
+
+% Display the noisy and smoothed images
+figure;
+subplot(1, 2, 1);
+imshow(noisy_image);
+title('Noisy Image (Gaussian)');
+
+subplot(1, 2, 2);
+imshow(smoothed_image);
+title('Minimized Gaussian Noise (Gaussian Smoothing)');
+
+
+% Read the noisy image affected by any type of noise
+noisy_image = imread('noisy_image.jpg'); % Replace 'noisy_image.jpg' with your image file
+
+% Perform median filtering to remove noise (e.g., using a median filter)
+restored_image = medfilt2(noisy_image, [3, 3]); % Apply a 3x3 median filter, adjust the size as needed
+
+% Display the noisy and restored images
+figure;
+subplot(1, 2, 1);
+imshow(noisy_image);
+title('Noisy Image');
+
+subplot(1, 2, 2);
+imshow(restored_image);
+title('Restored Image (Noise Removed)');
