@@ -47,5 +47,34 @@ figure;
 imshow(binaryImage); 
 
 title('Thresholded Binary Image'); 
+%d.
+// Read the input image
+image = imread('input_image.jpg'); // Replace 'input_image.jpg' with your image file
+
+// Convert the image to grayscale if it's a color image
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+// Perform contrast stretching
+min_intensity = min(image(:)); // Minimum intensity value in the image
+max_intensity = max(image(:)); // Maximum intensity value in the image
+
+// Define the desired output range (e.g., full range 0-255)
+output_min = 0;
+output_max = 255;
+
+// Perform contrast stretching using the formula
+stretched_image = uint8(((double(image) - min_intensity) / (max_intensity - min_intensity)) * (output_max - output_min) + output_min);
+
+// Display the original and stretched images
+figure;
+subplot(1, 2, 1);
+imshow(image);
+title('Original Image');
+
+subplot(1, 2, 2);
+imshow(stretched_image);
+title('Contrast Stretched Image');
 
  
